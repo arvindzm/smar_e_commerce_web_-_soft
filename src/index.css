@@ -1,0 +1,164 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Design tokens. Change a value here and it updates across the site.
+   Each colour becomes a Tailwind class, e.g. bg-primary, text-danger.
+------------------------------------------------------------------- */
+@theme {
+  /* Fonts */
+  --font-heading: 'Quicksand', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Brand colours - Fresh Organic Food & Spices Theme */
+  --color-primary: hsl(142 71% 32%);
+  --color-primary-dark: hsl(142 76% 23%);
+  --color-primary-light: hsl(142 65% 93%);
+  --color-primary-pale: hsl(142 70% 97%);
+  --color-accent: hsl(28 92% 48%);
+  --color-accent-dark: hsl(28 90% 38%);
+  --color-accent-light: hsl(40 95% 93%);
+
+  /* Status colours */
+  --color-danger: hsl(354 78% 42%);
+  --color-danger-light: hsl(354 76% 96%);
+  --color-warning: hsl(28 90% 38%);
+  --color-warning-light: hsl(40 95% 92%);
+  --color-info: hsl(224 71% 49%);
+  --color-star: hsl(36 100% 50%);
+
+  /* Text and surfaces */
+  --color-heading: hsl(222 47% 11%);
+  --color-body: hsl(0 0% 42%);
+  --color-muted: hsl(0 0% 44%);
+  --color-line: hsl(220 14% 91%);
+  --color-surface: #f2fdf6;
+
+  /* Shape and depth */
+  --radius-card: 1rem;
+  --shadow-card: 0 10px 30px -12px hsl(222 47% 11% / 0.18);
+  --shadow-header: 0 4px 20px hsl(222 47% 11% / 0.06);
+}
+
+/* Page container: 1400px max, with side padding that grows on larger screens. */
+@utility container-page {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (min-width: 640px) {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* Standard bordered card used for products, forms and panels. */
+@utility card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+/* Vertical gap between page sections. */
+@utility section-gap {
+  padding-top: 3rem;
+
+  @media (min-width: 1024px) {
+    padding-top: 5rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-body);
+    background: #fff;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-heading);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  /* Fluid heading sizes: they scale smoothly between mobile and desktop. */
+  h1 { font-size: clamp(2rem, 1.2rem + 3.6vw, 3.5rem); }
+  h2 { font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.5rem); }
+  h3 { font-size: clamp(1.375rem, 1.15rem + 1vw, 1.875rem); }
+  h4 { font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem); }
+  h5 { font-size: 1.125rem; }
+  h6 { font-size: 1rem; }
+
+  button, [role='button'], select, summary {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Respect the "reduce motion" accessibility setting. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Two-handle price slider (components/common/PriceRange.jsx). */
+.dual-range {
+  position: relative;
+  height: 1.25rem;
+}
+
+.dual-range input[type='range'] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  pointer-events: none;
+}
+
+.dual-range input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--color-primary);
+  cursor: pointer;
+}
+
+.dual-range input[type='range']::-moz-range-thumb {
+  pointer-events: auto;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 1px var(--color-primary);
+  cursor: pointer;
+}
